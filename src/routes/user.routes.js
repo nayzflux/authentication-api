@@ -13,7 +13,7 @@ router.get("/", authMiddleware.isAuth, permissionMiddleware.canGetUsers, userCon
 router.get("/:_id", authMiddleware.isAuth, permissionMiddleware.canGetUser, userController.get);
 
 // éditer un utilisateur
-router.put("/:_id", authMiddleware.isAuth, permissionMiddleware.canEditUser, userController.edit);
+router.put("/:_id", authMiddleware.isAuth, permissionMiddleware.canEditUser, permissionMiddleware.canEditRole, permissionMiddleware.canEditPassword, userController.edit);
 
 // supprimer un utilisateur
 router.delete("/:_id", authMiddleware.isAuth, permissionMiddleware.canDeleteUser, userController.delete);
