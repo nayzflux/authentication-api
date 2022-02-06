@@ -46,8 +46,9 @@ module.exports.canDeleteUser = (req, res, next) => {
 module.exports.canEditRole = (req, res, next) => {
     const sender = res.locals.sender;
     const userId = req.params._id;
+    const { user } = req.body;
 
-    if (req.body.user.role) {
+    if (user && user.role) {
         if (sender.role === "Admin") return next();
 
         console.log(`        Permission d'éditer le role de l'utilisateur avec l'ID : ${userId} refusé.`);
@@ -60,8 +61,9 @@ module.exports.canEditRole = (req, res, next) => {
 module.exports.canEditPassword = (req, res, next) => {
     const sender = res.locals.sender;
     const userId = req.params._id;
+    const { user } = req.body;
 
-    if (req.body.user.password) {
+    if (user && user.password) {
         console.log(`        Permission d'éditer le mot de passe de l'utilisateur avec l'ID : ${userId} refusé.`);
         return res.status(403).json({ message: `Vous n'avez pas la permissions d'éditer le mot de passe de l'utilisateur avec l'ID : ${userId}.` });
     }
