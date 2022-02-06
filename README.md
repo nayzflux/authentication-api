@@ -1,5 +1,6 @@
 # authentication-api
-A test API for other project
+This project is an test API for authentification, role-based permission and CRUD action to be implemented in other project.
+The objective of this project is to build a strong and secure API to support my next projects.
 ## Test the API
 You can test the API at https://api.test.nayzbysodium.com/api/v1 to discover bugs or vulnerability if you discorver bug or vulnerability you can contact me on discord NayZ.Sodium#5268 or do a pull request
 ## Documentation
