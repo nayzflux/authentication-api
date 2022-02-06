@@ -1,0 +1,26 @@
+version: "3"
+
+services: 
+    api:
+        image: nayzbysodium/authentication-api:latest
+        expose:
+          - 80
+        labels:
+          - traefik.enable=true
+          - traefik.http.routers.authentication-api.rule=Host(`api.test.nayzbysodium.com`)
+          - traefik.http.routers.authentication-api.entrypoints=websecure
+          - traefik.http.routers.authentication-api.service=authentication-api
+          - traefik.http.services.authentication-api.loadbalancer.server.port=80
+          - traefik.http.routers.authentication-api.tls.certresolver=production
+        environment:
+            TZ: timezone
+            PORT: port
+            SESSION_SECRET: secret
+            MONGO_URL: url
+        networks:
+          - webgateway
+
+networks:
+  webgateway:
+    external: true
+    name: webgateway

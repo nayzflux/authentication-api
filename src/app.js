@@ -9,7 +9,7 @@ const userRoutes = require("./routes/user.routes");
 
 const app = express();
 
-require("dotenv").config({ path: ".ENV" });
+// require("dotenv").config({ path: ".ENV" });
 require("./database/mongodb");
 
 app.use(bodyParser.json());
