@@ -13,7 +13,7 @@ Response
     "csrfToken": "qOSMu4Wl-m4M6u2U7MTVWClHMjJqPs63MAqU"
 }
 ```
-**In next request you must send the __CSRF token__ on header X-CSRF-Token=token**
+**In next request you must send the _CSRF token_ on header X-CSRF-Token=token**
 ### Register
 ```POST https://api.test.nayzbysodium.com/api/v1/auth/register```
 
