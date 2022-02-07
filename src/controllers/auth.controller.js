@@ -27,7 +27,7 @@ module.exports.register = async (req, res) => {
         req.session.user = {
             _id: user._id
         }
-        
+
         console.log("Utilisateur " + user.email + " créé avec succès.");
         return res.status(201).json({ message: "Utilisateur créé.", user: { username: user.username, email: user.email, role: user.role } });
     }).catch((err) => {
@@ -46,7 +46,7 @@ module.exports.login = async (req, res) => {
 
     if (username) {
         // trouver l'utilisateur avec le nom d'utilisateur fourni puis comparer les mots de passe
-        UserModel.findOne({ username: username }).then(async (user) => {
+        UserModel.findOne({ username: { $eq: username } }).then(async (user) => {
             bcrypt.compare(password, user.password).then((result) => {
                 if (result === false) {
                     console.log("Accès au compte de " + user.email + " refusé.");
@@ -68,7 +68,7 @@ module.exports.login = async (req, res) => {
 
     if (email) {
         // trouver l'utilisateur avec l'adresse e-mail fourni puis comparer les mots de passe
-        UserModel.findOne({ email: email }).then(async (user) => {
+        UserModel.findOne({ email: { $eq: email } }).then(async (user) => {
             bcrypt.compare(password, user.password).then((result) => {
                 if (result === false) {
                     console.log("Accès au compte de " + user.email + " refusé.");

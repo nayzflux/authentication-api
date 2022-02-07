@@ -24,7 +24,7 @@ module.exports.edit = async (req, res) => {
 
     const newUser = await UserModel.findOneAndUpdate({ _id: userId }, user, { new: true }).select("-password");
 
-    console.log(`        Utilisateur ${user.email} édité.`);
+    console.log(`        Utilisateur ${newUser.email} édité.`);
     return res.status(200).json({ message: `Utilisateur ${newUser.email} édité.`, user: newUser });
 }
 
