@@ -13,13 +13,15 @@ const app = express();
 require("dotenv").config({ path: ".ENV" });
 require("./database/mongodb");
 
+app.enable("trust proxy");
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(session(
     {
         secret: process.env.SESSION_SECRET,
-        cookie: { maxAge: 30 * 24 * 60 * 60 * 1000, expires: 30 * 24 * 60 * 60 * 1000 },
+        cookie: { maxAge: 30 * 24 * 60 * 60 * 1000, expires: 30 * 24 * 60 * 60 * 1000, httpOnly: true, secure: true },
         saveUninitialized: false,
         resave: false,
         store: MongoStore.create({ mongoUrl: process.env.MONGO_URL })
