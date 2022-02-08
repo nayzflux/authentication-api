@@ -3,6 +3,7 @@ const session = require("express-session");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const csurf = require("csurf");
+const rateLimit = require("express-rate-limit");
 const MongoStore = require(`connect-mongo`);
 
 const authRoutes = require("./routes/auth.routes");
@@ -15,6 +16,7 @@ require("./database/mongodb");
 
 app.enable("trust proxy");
 
+app.use(rateLimit({ windowMs: 1 * 60 * 100, max: 5 }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
