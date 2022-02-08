@@ -4,6 +4,16 @@ The objective of this project is to build a strong and secure API to support my 
 ## Test the API
 You can test the API at https://api.test.nayzbysodium.com/api/v1 to discover bugs or vulnerability if you discorver bug or vulnerability you can contact me on discord NayZ.Sodium#5268 or do a pull request
 ## Documentation
+### CSRF Protection - Get CSRF Token
+```GET https://api.test.nayzbysodium.com/api/v1/csrf```
+
+Response
+```json
+{
+    "csrfToken": "qOSMu4Wl-m4M6u2U7MTVWClHMjJqPs63MAqU"
+}
+```
+**In next request you must send the _CSRF token_ on header X-CSRF-Token=token**
 ### Register
 ```POST https://api.test.nayzbysodium.com/api/v1/auth/register```
 
