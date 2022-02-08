@@ -15,8 +15,8 @@ module.exports.register = async (req, res) => {
     if (password !== passwordConfirm) return res.status(400).json({ message: "Les mots de passe ne correspondent pas." });
 
     // vérifier si le nom d'utilisateur et l'adresse e-mail est déjà utilisé
-    if (await UserModel.exists({ username: username })) return res.status(400).json({ message: "Ce nom d'utilisateur est déjà utilisé." });
-    if (await UserModel.exists({ email: email })) return res.status(400).json({ message: "Cette adresse e-mail est déjà utilisée." });
+    if (await UserModel.exists({ username: { $eq: username } })) return res.status(400).json({ message: "Ce nom d'utilisateur est déjà utilisé." });
+    if (await UserModel.exists({ email: { $eq: email } })) return res.status(400).json({ message: "Cette adresse e-mail est déjà utilisée." });
 
     // hasher le mot de passe
     const hash = await bcrypt.hash(password, 10);
@@ -84,7 +84,7 @@ module.exports.login = async (req, res) => {
                 }
             });
         }).catch(() => {
-            return res.status(404).json({ message: "L'utilisateur avec ce nom d'utilisateur n'existe pas." });
+            return res.status(404).json({ message: "L'utilisateur avec cette adresse e-mail n'existe pas." });
         });
     }
 }
